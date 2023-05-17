@@ -192,7 +192,7 @@ func (im IBCMiddleware) OnRecvPacket(
 
 	// Check if the packet was sent from Picasso
 	paraChainIBCTokenInfo, found := im.keeper.GetParachainTokenInfo(ctx, data.Denom)
-	if found && (paraChainIBCTokenInfo.ChannelId == packet.DestinationPort) {
+	if found && (paraChainIBCTokenInfo.ChannelId == packet.DestinationChannel) {
 		disableDenomComposition = true
 	}
 
