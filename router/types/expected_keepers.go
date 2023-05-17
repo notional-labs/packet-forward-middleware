@@ -7,13 +7,8 @@ import (
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	"github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	transfermiddlewaretypes "github.com/notional-labs/banksy/v2/x/transfermiddleware/types"
 )
-
-type ParachainIBCTokenInfo struct {
-	IbcDenom    string
-	ChannelId   string
-	NativeDenom string
-}
 
 // TransferKeeper defines the expected transfer keeper
 type TransferKeeper interface {
@@ -44,5 +39,5 @@ type BankKeeper interface {
 // Transfer middleware keeper
 type TransferMiddlewareKeeper interface {
 	HasParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) bool
-	GetParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) ParachainIBCTokenInfo
+	GetParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) transfermiddlewaretypes.ParachainIBCTokenInfo
 }

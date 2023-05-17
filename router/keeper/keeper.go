@@ -22,6 +22,7 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v7/modules/core/05-port/types"
 	ibcexported "github.com/cosmos/ibc-go/v7/modules/core/exported"
 	coretypes "github.com/cosmos/ibc-go/v7/modules/core/types"
+	transfermiddlewaretypes "github.com/notional-labs/banksy/v2/x/transfermiddleware/types"
 	"github.com/strangelove-ventures/packet-forward-middleware/v7/router/types"
 )
 
@@ -473,8 +474,8 @@ func (k *Keeper) GetAndClearInFlightPacket(
 	return &inFlightPacket
 }
 
-func (k Keeper) GetParachainTokenInfo(ctx sdk.Context, nativeDenom string) (types.ParachainIBCTokenInfo, bool) {
-	var paraChainIBCTokenInfo types.ParachainIBCTokenInfo
+func (k Keeper) GetParachainTokenInfo(ctx sdk.Context, nativeDenom string) (transfermiddlewaretypes.ParachainIBCTokenInfo, bool) {
+	var paraChainIBCTokenInfo transfermiddlewaretypes.ParachainIBCTokenInfo
 	if !k.transferMiddlewareKeeper.HasParachainIBCTokenInfo(ctx, nativeDenom) {
 		return paraChainIBCTokenInfo, false
 	}
