@@ -9,6 +9,12 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 )
 
+type ParachainIBCTokenInfo struct {
+	IbcDenom    string
+	ChannelId   string
+	NativeDenom string
+}
+
 // TransferKeeper defines the expected transfer keeper
 type TransferKeeper interface {
 	Transfer(ctx context.Context, msg *types.MsgTransfer) (*types.MsgTransferResponse, error)
@@ -33,4 +39,10 @@ type BankKeeper interface {
 	SendCoins(ctx sdk.Context, fromAddr sdk.AccAddress, toAddr sdk.AccAddress, amt sdk.Coins) error
 	SendCoinsFromAccountToModule(ctx sdk.Context, senderAddr sdk.AccAddress, recipientModule string, amt sdk.Coins) error
 	BurnCoins(ctx sdk.Context, moduleName string, amt sdk.Coins) error
+}
+
+// Transfer middleware keeper
+type TransferMiddlewareKeeper interface {
+	HasParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) bool
+	GetParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) ParachainIBCTokenInfo
 }
