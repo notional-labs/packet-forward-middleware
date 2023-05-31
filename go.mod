@@ -15,7 +15,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/iancoleman/orderedmap v0.2.0
-	github.com/notional-labs/banksy/v2 v2.0.0-00010101000000-000000000000
+	github.com/notional-labs/centauri/v2 v2.0.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
@@ -120,4 +120,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/notional-labs/banksy/v2 => github.com/notional-labs/composable-testnet/v2 v2.3.0
+replace github.com/notional-labs/centauri/v2 => github.com/notional-labs/composable-testnet/v2 v2.3.0
