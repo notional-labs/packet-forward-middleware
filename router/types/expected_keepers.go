@@ -7,7 +7,7 @@ import (
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	"github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
-	transfermiddlewaretypes "github.com/notional-labs/banksy/v2/x/transfermiddleware/types"
+	transfermiddlewaretypes "github.com/notional-labs/centauri/v2/x/transfermiddleware/types"
 )
 
 // TransferKeeper defines the expected transfer keeper
