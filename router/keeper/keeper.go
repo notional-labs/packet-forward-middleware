@@ -511,7 +511,7 @@ func (k Keeper) GetParachainTokenInfo(ctx sdk.Context, nativeDenom string) (tran
 		return paraChainIBCTokenInfo, false
 	}
 
-	paraChainIBCTokenInfo = k.transferMiddlewareKeeper.GetParachainIBCTokenInfo(ctx, nativeDenom)
+	paraChainIBCTokenInfo = k.transferMiddlewareKeeper.GetParachainIBCTokenInfoByNativeDenom(ctx, nativeDenom)
 	return paraChainIBCTokenInfo, true
 }
 
