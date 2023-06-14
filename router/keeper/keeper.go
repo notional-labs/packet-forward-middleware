@@ -507,7 +507,7 @@ func (k *Keeper) GetAndClearInFlightPacket(
 
 func (k Keeper) GetParachainTokenInfo(ctx sdk.Context, nativeDenom string) (transfermiddlewaretypes.ParachainIBCTokenInfo, bool) {
 	var paraChainIBCTokenInfo transfermiddlewaretypes.ParachainIBCTokenInfo
-	if !k.transferMiddlewareKeeper.HasParachainIBCTokenInfo(ctx, nativeDenom) {
+	if !k.transferMiddlewareKeeper.HasParachainIBCTokenInfoByNativeDenom(ctx, nativeDenom) {
 		return paraChainIBCTokenInfo, false
 	}
 

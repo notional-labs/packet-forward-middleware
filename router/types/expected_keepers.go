@@ -40,6 +40,6 @@ type BankKeeper interface {
 
 // Transfer middleware keeper
 type TransferMiddlewareKeeper interface {
-	HasParachainIBCTokenInfo(ctx sdk.Context, nativeDenom string) bool
+	HasParachainIBCTokenInfoByNativeDenom(ctx sdk.Context, nativeDenom string) bool
 	GetParachainIBCTokenInfoByNativeDenom(ctx sdk.Context, nativeDenom string) transfermiddlewaretypes.ParachainIBCTokenInfo
 }
