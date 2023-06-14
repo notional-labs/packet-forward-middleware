@@ -120,4 +120,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/notional-labs/centauri/v3 => github.com/notional-labs/composable-centauri/v3 v3.0.3-0.20230614214402-d52ee4fcd7ef
+replace github.com/notional-labs/centauri/v3 => github.com/notional-labs/composable-centauri/v3 v3.0.3-0.20230614215324-8b5a953b313e
