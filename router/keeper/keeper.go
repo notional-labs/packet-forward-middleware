@@ -155,7 +155,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 			escrowAddress := transfertypes.GetEscrowAddress(packet.SourcePort, packet.SourceChannel)
 
 			if transfertypes.SenderChainIsSource(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId, fullDenomPath) {
-				paraChainIBCTokenInfo, found := k.GetParachainTokenInfo(ctx, data.Denom)
+				paraChainIBCTokenInfo, found := k.GetParachainTokenInfoByNativeDenom(ctx, data.Denom)
 				if found && (paraChainIBCTokenInfo.ChannelId == inFlightPacket.RefundChannelId) {
 					// if packet was forwarded from Picasso, we just need to burn the token in 2 escrow address
 					// parse the transfer amount
@@ -218,7 +218,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 		} else {
 			// Sender chain is sink
 			denomTrace := transfertypes.ParseDenomTrace(fullDenomPath)
-			paraChainIBCTokenInfo, found := k.GetParachainTokenInfo(ctx, denomTrace.BaseDenom)
+			paraChainIBCTokenInfo, found := k.GetParachainTokenInfoByAssetID(ctx, denomTrace.BaseDenom)
 			if found && (paraChainIBCTokenInfo.ChannelId == packet.SourceChannel) {
 				// This packet is forwared to picasso => Mint Ibc token and native token to escrow address
 				// parse the transfer amount
@@ -505,7 +505,17 @@ func (k *Keeper) GetAndClearInFlightPacket(
 	return &inFlightPacket
 }
 
-func (k Keeper) GetParachainTokenInfo(ctx sdk.Context, nativeDenom string) (transfermiddlewaretypes.ParachainIBCTokenInfo, bool) {
+func (k Keeper) GetParachainTokenInfoByAssetID(ctx sdk.Context, assetID string) (transfermiddlewaretypes.ParachainIBCTokenInfo, bool) {
+	var paraChainIBCTokenInfo transfermiddlewaretypes.ParachainIBCTokenInfo
+	if !k.transferMiddlewareKeeper.HasParachainIBCTokenInfoByAssetID(ctx, assetID) {
+		return paraChainIBCTokenInfo, false
+	}
+
+	paraChainIBCTokenInfo = k.transferMiddlewareKeeper.GetParachainIBCTokenInfoByAssetID(ctx, assetID)
+	return paraChainIBCTokenInfo, true
+}
+
+func (k Keeper) GetParachainTokenInfoByNativeDenom(ctx sdk.Context, nativeDenom string) (transfermiddlewaretypes.ParachainIBCTokenInfo, bool) {
 	var paraChainIBCTokenInfo transfermiddlewaretypes.ParachainIBCTokenInfo
 	if !k.transferMiddlewareKeeper.HasParachainIBCTokenInfoByNativeDenom(ctx, nativeDenom) {
 		return paraChainIBCTokenInfo, false
