@@ -6,18 +6,18 @@ require (
 	cosmossdk.io/errors v1.0.0-beta.7
 	github.com/armon/go-metrics v0.4.1
 	github.com/cometbft/cometbft v0.37.1
-	github.com/cometbft/cometbft-db v0.7.0
+	github.com/cometbft/cometbft-db v0.8.0
 	github.com/cosmos/cosmos-sdk v0.47.3
 	github.com/cosmos/gogoproto v1.4.10
-	github.com/cosmos/ibc-go/v7 v7.0.0
+	github.com/cosmos/ibc-go/v7 v7.0.1
 	github.com/golang/mock v1.6.0
 	github.com/golang/protobuf v1.5.3
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/iancoleman/orderedmap v0.2.0
-	github.com/notional-labs/centauri/v3 v3.0.0
+	github.com/notional-labs/centauri/v4 v4.0.0
 	github.com/spf13/cobra v1.7.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
 	google.golang.org/grpc v1.55.0
 )
@@ -76,6 +76,7 @@ require (
 	github.com/jmhodges/levigo v1.0.0 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
+	github.com/linxGnu/grocksdb v1.7.16 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/manifoldco/promptui v0.9.0 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
@@ -87,20 +88,19 @@ require (
 	github.com/petermattis/goid v0.0.0-20230317030725-371a4b8eda08 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/client_golang v1.14.0 // indirect
+	github.com/prometheus/client_golang v1.15.0 // indirect
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.42.0 // indirect
 	github.com/prometheus/procfs v0.9.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/sasha-s/go-deadlock v0.3.1 // indirect
 	github.com/spf13/afero v1.9.3 // indirect
-	github.com/spf13/cast v1.5.0 // indirect
+	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.15.0 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d // indirect
-	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
 	github.com/tendermint/go-amino v0.16.0 // indirect
 	github.com/tidwall/btree v1.6.0 // indirect
 	github.com/zondax/hid v0.9.1 // indirect
@@ -120,4 +120,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/notional-labs/centauri/v3 => github.com/notional-labs/composable-centauri/v3 v3.0.3-0.20230614215324-8b5a953b313e
+replace github.com/notional-labs/centauri/v4 => github.com/notional-labs/composable-centauri/v4 v4.0.0-20230719071809-dd43d7a38418
