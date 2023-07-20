@@ -123,9 +123,9 @@ var xxx_messageInfo_Params proto.InternalMessageInfo
 // writing the acknowledgement and refunding if necessary.
 type InFlightPacket struct {
 	OriginalSenderAddress  string `protobuf:"bytes,1,opt,name=original_sender_address,json=originalSenderAddress,proto3" json:"original_sender_address,omitempty"`
-	RefundChannelId        string `protobuf:"bytes,2,opt,name=refund_channel_id,json=refundChannelId,proto3" json:"refund_channel_id,omitempty"`
+	RefundChannelID        string `protobuf:"bytes,2,opt,name=refund_channel_id,json=refundChannelID,proto3" json:"refund_channel_id,omitempty"`
 	RefundPortId           string `protobuf:"bytes,3,opt,name=refund_port_id,json=refundPortId,proto3" json:"refund_port_id,omitempty"`
-	PacketSrcChannelId     string `protobuf:"bytes,4,opt,name=packet_src_channel_id,json=packetSrcChannelId,proto3" json:"packet_src_channel_id,omitempty"`
+	PacketSrcChannelID     string `protobuf:"bytes,4,opt,name=packet_src_channel_id,json=packetSrcChannelID,proto3" json:"packet_src_channel_id,omitempty"`
 	PacketSrcPortId        string `protobuf:"bytes,5,opt,name=packet_src_port_id,json=packetSrcPortId,proto3" json:"packet_src_port_id,omitempty"`
 	PacketTimeoutTimestamp uint64 `protobuf:"varint,6,opt,name=packet_timeout_timestamp,json=packetTimeoutTimestamp,proto3" json:"packet_timeout_timestamp,omitempty"`
 	PacketTimeoutHeight    string `protobuf:"bytes,7,opt,name=packet_timeout_height,json=packetTimeoutHeight,proto3" json:"packet_timeout_height,omitempty"`
@@ -176,9 +176,9 @@ func (m *InFlightPacket) GetOriginalSenderAddress() string {
 	return ""
 }
 
-func (m *InFlightPacket) GetRefundChannelId() string {
+func (m *InFlightPacket) GetRefundChannelID() string {
 	if m != nil {
-		return m.RefundChannelId
+		return m.RefundChannelID
 	}
 	return ""
 }
@@ -190,9 +190,9 @@ func (m *InFlightPacket) GetRefundPortId() string {
 	return ""
 }
 
-func (m *InFlightPacket) GetPacketSrcChannelId() string {
+func (m *InFlightPacket) GetPacketSrcChannelID() string {
 	if m != nil {
-		return m.PacketSrcChannelId
+		return m.PacketSrcChannelID
 	}
 	return ""
 }
@@ -468,10 +468,10 @@ func (m *InFlightPacket) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x2a
 	}
-	if len(m.PacketSrcChannelId) > 0 {
-		i -= len(m.PacketSrcChannelId)
-		copy(dAtA[i:], m.PacketSrcChannelId)
-		i = encodeVarintGenesis(dAtA, i, uint64(len(m.PacketSrcChannelId)))
+	if len(m.PacketSrcChannelID) > 0 {
+		i -= len(m.PacketSrcChannelID)
+		copy(dAtA[i:], m.PacketSrcChannelID)
+		i = encodeVarintGenesis(dAtA, i, uint64(len(m.PacketSrcChannelID)))
 		i--
 		dAtA[i] = 0x22
 	}
@@ -482,10 +482,10 @@ func (m *InFlightPacket) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.RefundChannelId) > 0 {
-		i -= len(m.RefundChannelId)
-		copy(dAtA[i:], m.RefundChannelId)
-		i = encodeVarintGenesis(dAtA, i, uint64(len(m.RefundChannelId)))
+	if len(m.RefundChannelID) > 0 {
+		i -= len(m.RefundChannelID)
+		copy(dAtA[i:], m.RefundChannelID)
+		i = encodeVarintGenesis(dAtA, i, uint64(len(m.RefundChannelID)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -551,7 +551,7 @@ func (m *InFlightPacket) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
 	}
-	l = len(m.RefundChannelId)
+	l = len(m.RefundChannelID)
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
 	}
@@ -559,7 +559,7 @@ func (m *InFlightPacket) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
 	}
-	l = len(m.PacketSrcChannelId)
+	l = len(m.PacketSrcChannelID)
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
 	}
@@ -958,7 +958,7 @@ func (m *InFlightPacket) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RefundChannelId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RefundChannelID", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -986,7 +986,7 @@ func (m *InFlightPacket) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.RefundChannelId = string(dAtA[iNdEx:postIndex])
+			m.RefundChannelID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -1022,7 +1022,7 @@ func (m *InFlightPacket) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PacketSrcChannelId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PacketSrcChannelID", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1050,7 +1050,7 @@ func (m *InFlightPacket) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PacketSrcChannelId = string(dAtA[iNdEx:postIndex])
+			m.PacketSrcChannelID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {

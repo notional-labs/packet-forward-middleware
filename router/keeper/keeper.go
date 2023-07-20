@@ -102,7 +102,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 	ack channeltypes.Acknowledgement,
 ) error {
 	// Lookup module by channel capability
-	_, chanCap, err := k.channelKeeper.LookupModuleByChannel(ctx, inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId)
+	_, chanCap, err := k.channelKeeper.LookupModuleByChannel(ctx, inFlightPacket.RefundPortId, inFlightPacket.RefundChannelID)
 	if err != nil {
 		return errorsmod.Wrap(err, "could not retrieve module from port-id")
 	}
@@ -121,9 +121,9 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 				Data:               inFlightPacket.PacketData,
 				Sequence:           inFlightPacket.RefundSequence,
 				SourcePort:         inFlightPacket.PacketSrcPortId,
-				SourceChannel:      inFlightPacket.PacketSrcChannelId,
+				SourceChannel:      inFlightPacket.PacketSrcChannelID,
 				DestinationPort:    inFlightPacket.RefundPortId,
-				DestinationChannel: inFlightPacket.RefundChannelId,
+				DestinationChannel: inFlightPacket.RefundChannelID,
 				TimeoutHeight:      clienttypes.MustParseHeight(inFlightPacket.PacketTimeoutHeight),
 				TimeoutTimestamp:   inFlightPacket.PacketTimeoutTimestamp,
 			}, newAck)
@@ -154,9 +154,9 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 
 			escrowAddress := transfertypes.GetEscrowAddress(packet.SourcePort, packet.SourceChannel)
 
-			if transfertypes.SenderChainIsSource(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId, fullDenomPath) {
+			if transfertypes.SenderChainIsSource(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelID, fullDenomPath) {
 				paraChainIBCTokenInfo, found := k.GetParachainTokenInfoByNativeDenom(ctx, data.Denom)
-				if found && (paraChainIBCTokenInfo.ChannelId == inFlightPacket.RefundChannelId) {
+				if found && (paraChainIBCTokenInfo.ChannelID == inFlightPacket.RefundChannelID) {
 					// if packet was forwarded from Picasso, we just need to burn the token in 2 escrow address
 					// parse the transfer amount
 					transferAmount, ok := sdk.NewIntFromString(data.Amount)
@@ -172,7 +172,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 					}
 					// send ibc token to module address
 					ibcToken := sdk.NewCoin(paraChainIBCTokenInfo.IbcDenom, transferAmount)
-					ibcEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId)
+					ibcEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelID)
 					if err = k.bankKeeper.SendCoinsFromAccountToModule(
 						ctx, ibcEscrowAddress, transfertypes.ModuleName, sdk.NewCoins(ibcToken),
 					); err != nil {
@@ -189,7 +189,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 					}
 				} else {
 					// transfer funds from escrow account for forwarded packet to escrow account going back for refund.
-					refundEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId)
+					refundEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelID)
 
 					if err := k.bankKeeper.SendCoins(
 						ctx, escrowAddress, refundEscrowAddress, sdk.NewCoins(token),
@@ -219,7 +219,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 			// Sender chain is sink
 			denomTrace := transfertypes.ParseDenomTrace(fullDenomPath)
 			paraChainIBCTokenInfo, found := k.GetParachainTokenInfoByAssetID(ctx, denomTrace.BaseDenom)
-			if found && (paraChainIBCTokenInfo.ChannelId == packet.SourceChannel) {
+			if found && (paraChainIBCTokenInfo.ChannelID == packet.SourceChannel) {
 				// This packet is forwared to picasso => Mint Ibc token and native token to escrow address
 				// parse the transfer amount
 				transferAmount, ok := sdk.NewIntFromString(data.Amount)
@@ -228,7 +228,7 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 				}
 				// send native token to native escrow address
 				nativeToken := sdk.NewCoin(paraChainIBCTokenInfo.NativeDenom, transferAmount)
-				nativeEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelId)
+				nativeEscrowAddress := transfertypes.GetEscrowAddress(inFlightPacket.RefundPortId, inFlightPacket.RefundChannelID)
 				if err := k.bankKeeper.MintCoins(ctx, transfertypes.ModuleName, sdk.NewCoins(nativeToken)); err != nil {
 					return fmt.Errorf("failed to send coins from escrow to module account for burn: %w", err)
 				}
@@ -253,9 +253,9 @@ func (k *Keeper) WriteAcknowledgementForForwardedPacket(
 		Data:               inFlightPacket.PacketData,
 		Sequence:           inFlightPacket.RefundSequence,
 		SourcePort:         inFlightPacket.PacketSrcPortId,
-		SourceChannel:      inFlightPacket.PacketSrcChannelId,
+		SourceChannel:      inFlightPacket.PacketSrcChannelID,
 		DestinationPort:    inFlightPacket.RefundPortId,
-		DestinationChannel: inFlightPacket.RefundChannelId,
+		DestinationChannel: inFlightPacket.RefundChannelID,
 		TimeoutHeight:      clienttypes.MustParseHeight(inFlightPacket.PacketTimeoutHeight),
 		TimeoutTimestamp:   inFlightPacket.PacketTimeoutTimestamp,
 	}, ack)
@@ -349,11 +349,11 @@ func (k *Keeper) ForwardTransferPacket(
 		inFlightPacket = &types.InFlightPacket{
 			PacketData:            srcPacket.Data,
 			OriginalSenderAddress: srcPacketSender,
-			RefundChannelId:       srcPacket.DestinationChannel,
+			RefundChannelID:       srcPacket.DestinationChannel,
 			RefundPortId:          srcPacket.DestinationPort,
 			RefundSequence:        srcPacket.Sequence,
 			PacketSrcPortId:       srcPacket.SourcePort,
-			PacketSrcChannelId:    srcPacket.SourceChannel,
+			PacketSrcChannelID:    srcPacket.SourceChannel,
 
 			PacketTimeoutTimestamp: srcPacket.TimeoutTimestamp,
 			PacketTimeoutHeight:    srcPacket.TimeoutHeight.String(),
@@ -408,11 +408,11 @@ func (k *Keeper) TimeoutShouldRetry(
 		k.Logger(ctx).Error("packetForwardMiddleware reached max retries for packet",
 			"key", string(key),
 			"original-sender-address", inFlightPacket.OriginalSenderAddress,
-			"refund-channel-id", inFlightPacket.RefundChannelId,
+			"refund-channel-id", inFlightPacket.RefundChannelID,
 			"refund-port-id", inFlightPacket.RefundPortId,
 		)
 		return &inFlightPacket, fmt.Errorf("giving up on packet on channel (%s) port (%s) after max retries",
-			inFlightPacket.RefundChannelId, inFlightPacket.RefundPortId)
+			inFlightPacket.RefundChannelID, inFlightPacket.RefundPortId)
 	}
 
 	return &inFlightPacket, nil
@@ -441,7 +441,7 @@ func (k *Keeper) RetryTimeout(
 	if !ok {
 		k.Logger(ctx).Error("packetForwardMiddleware error parsing amount from string for router retry on timeout",
 			"original-sender-address", inFlightPacket.OriginalSenderAddress,
-			"refund-channel-id", inFlightPacket.RefundChannelId,
+			"refund-channel-id", inFlightPacket.RefundChannelID,
 			"refund-port-id", inFlightPacket.RefundPortId,
 			"retries-remaining", inFlightPacket.RetriesRemaining,
 			"amount", data.Amount,
