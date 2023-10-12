@@ -22,7 +22,7 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v7/modules/core/05-port/types"
 	ibcexported "github.com/cosmos/ibc-go/v7/modules/core/exported"
 	coretypes "github.com/cosmos/ibc-go/v7/modules/core/types"
-	transfermiddlewaretypes "github.com/notional-labs/composable/v5/x/transfermiddleware/types"
+	transfermiddlewaretypes "github.com/notional-labs/composable/v6/x/transfermiddleware/types"
 	"github.com/strangelove-ventures/packet-forward-middleware/v7/router/types"
 )
 
